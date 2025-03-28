@@ -7,12 +7,12 @@ const posts = require('../data/posts.js')
 
 // index
 function index(req,res){
-    console.log('lista posts')
+    res.json(posts)
 }
 
 // show
 function show(req,res){
-    console.log('post singolo')
+    console.log(req.params)
 }
 
 // store
