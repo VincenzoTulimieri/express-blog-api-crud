@@ -2,7 +2,8 @@
 const express = require('express')
 
 // importazione dei dati
-const posts = require('../data/posts.js')
+const posts = require('../data/posts.js');
+const { error } = require('console');
 
 
 // index
@@ -15,7 +16,11 @@ function show(req,res){
     const currentId = parseInt(req.params.id);
     const currentPost = posts.find(post => post.id === currentId)
     if(!currentPost){
-        res.json(posts)
+        res.status(404)
+        return res.json({
+            error: 'Not found',
+            message: 'Post non trovato'
+        })
     }
     res.json(currentPost)
 }
@@ -38,7 +43,7 @@ function modify(req,res){
 
 // destroy
 function destroy(req,res){
-    console.log('cancella post')
+    
 }
 
 // esportazione controller
