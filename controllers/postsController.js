@@ -7,12 +7,17 @@ const posts = require('../data/posts.js')
 
 // index
 function index(req,res){
-    res.json(posts)
+    res.json(posts);
 }
 
 // show
 function show(req,res){
-    console.log(req.params)
+    const currentId = parseInt(req.params.id);
+    const currentPost = posts.find(post => post.id === currentId)
+    if(!currentPost){
+        res.json(posts)
+    }
+    res.json(currentPost)
 }
 
 // store
