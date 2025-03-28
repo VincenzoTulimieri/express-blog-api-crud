@@ -43,7 +43,18 @@ function modify(req,res){
 
 // destroy
 function destroy(req,res){
+    const currentId = parseInt(req.params.id);
+    const currentPost = posts.find(post => post.id === currentId)
+    if(!currentPost){
+        res.status(404)
+        return res.json({
+            error: 'Not found',
+            message: 'Post non trovato'
+        })
+    }
     
+    posts.splice(posts.indexOf(currentPost),1)
+    res.json(posts)
 }
 
 // esportazione controller
