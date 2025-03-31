@@ -36,7 +36,6 @@ function show(req,res){
 // store
 function store(req,res){
     const newId = posts[posts.length -1].id +1;
-    
     const newPost ={
         id: newId,
         title: req.body.title,
@@ -50,14 +49,26 @@ function store(req,res){
 
 // update
 function update(req,res){
-    console.log('modifica del post')
-    res.send('modifica del post')
+    const currentId = parseInt(req.params.id);
+    const currentPost = posts.find(post => post.id === currentId)
+    if(!currentPost){
+        res.status(404)
+        return res.json({
+            error: 'Not found',
+            message: 'Post non trovato'
+        })
+    }
+    currentPost.title = req.body.title;
+    currentPost.content = req.body.content;
+    currentPost.tags = req.body.tags;
+    console.log(posts)
+    res.json(currentPost)
+    
 }
 
 // modify
 function modify(req,res){
-    console.log('modifica parte del post')
-    res.send('modifica parte del post')
+   
 }
 
 
