@@ -3,11 +3,19 @@ const express = require('express')
 
 // importazione dei dati
 const posts = require('../data/posts.js');
-const { error } = require('console');
+
+// const { error } = require('console');
 
 
 // index
 function index(req,res){
+    const queryTags = req.query.tags;
+
+    if(queryTags){
+        const currentTag = posts.filter(post => post.tags.includes(queryTags))
+        res.json(currentTag)
+    }
+
     res.json(posts);
 }
 
@@ -28,16 +36,19 @@ function show(req,res){
 // store
 function store(req,res){
     console.log('aggiungi post')
+    res.send('aggiungi post')
 }
 
 // update
 function update(req,res){
     console.log('modifica del post')
+    res.send('modifica del post')
 }
 
 // modify
 function modify(req,res){
     console.log('modifica parte del post')
+    res.send('modifica parte del post')
 }
 
 
@@ -54,7 +65,8 @@ function destroy(req,res){
     }
     
     posts.splice(posts.indexOf(currentPost),1)
-    res.json(posts)
+    res.sendStatus(204)
+    
 }
 
 // esportazione controller
