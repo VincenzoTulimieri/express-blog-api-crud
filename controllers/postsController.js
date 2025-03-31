@@ -68,7 +68,27 @@ function update(req,res){
 
 // modify
 function modify(req,res){
-   
+    const currentId = parseInt(req.params.id);
+    const currentPost = posts.find(post => post.id === currentId)
+    if(!currentPost){
+        res.status(404)
+        return res.json({
+            error: 'Not found',
+            message: 'Post non trovato'
+        })
+    }
+    if(req.body.title){
+        currentPost.title = req.body.title;
+    }
+    if(req.body.content){
+        currentPost.content = req.body.content;
+    }
+    if(req.body.tags){
+        currentPost.tags = req.body.tags;
+    }
+    console.log(posts)
+    res.json(currentPost)
+    
 }
 
 
