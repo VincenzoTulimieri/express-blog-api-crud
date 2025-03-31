@@ -4,13 +4,17 @@ const app = express();
 const port = 3000;
 
 // router
-const postsRouter = require('./routers/postsRouter.js')
+const postsRouter = require('./routers/postsRouter.js');
 
 // accesso per il client
-app.use(express.static('public'))
+app.use(express.static('public'));
+
+// body-parse
+app.use(express.json());
 
 // utilizzo router
-app.use('/posts', postsRouter)
+app.use('/posts', postsRouter);
+
 
 // server in attesa
 app.listen(port,()=>{
